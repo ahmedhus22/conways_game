@@ -7,7 +7,7 @@ private:
 public:
 	int x, y;
 	bool state;
-
+	int no_of_neighbours;
 	cell();
 	void draw();
 };
