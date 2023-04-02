@@ -93,7 +93,8 @@ int main()
 					for (int i = 0; i < screenWidth; i++) {
 						for (auto itr = white_cells.begin(); itr != white_cells.end(); itr++) {
 							if (CheckCollisionRecs(cells[i][j].get_cell(), itr->get_cell())) {
-								cells[i][j].no_of_neighbours++;
+								if (*itr != cells[i][j])
+									cells[i][j].no_of_neighbours++;
 							}
 						}
 					}
@@ -120,6 +121,8 @@ int main()
 								}
 							}
 						}
+						// Reset the no of neighbours back to 0
+						cells[i][j].no_of_neighbours = 0;
 					}
 				}
 			}
@@ -127,8 +130,6 @@ int main()
 			// Draws cells on the screen if state is ON
 			for (auto itr = white_cells.begin(); itr != white_cells.end(); itr++) {
 				itr->draw();
-				// Reset the no of neighbours back to 0
-				itr->no_of_neighbours = 0;
 			}
 
 		EndDrawing();
