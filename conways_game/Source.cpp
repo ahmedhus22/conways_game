@@ -5,21 +5,25 @@
 
 int main()
 {
-	const int screenWidth = 200;
-	const int screenHeight = 200;
+	const int windowWidth = 800;
+	const int windowHeight = 600;
 
-	InitWindow(screenWidth, screenHeight, "Game Of Life");
+	InitWindow(windowWidth, windowHeight, "Game Of Life");
 	SetWindowState(FLAG_VSYNC_HINT);
+
+	const int cellSize = 14;
+	const int screenWidth = windowWidth / cellSize;
+	const int screenHeight = windowHeight / cellSize;
 
 	cell(*cells)[screenHeight] = new cell[screenWidth][screenHeight];
 	bool game_running = false;
 	std::list<cell> white_cells;
 
 	// Initialize the position of all cells
-	for (int j = 0; j < screenHeight; j++) {
-		for (int i = 0; i < screenWidth; i++) {
-			cells[i][j].y = j;
-			cells[i][j].x = i;
+	for (int j = 0, Y = 0; j < screenHeight; j++, Y+=cellSize) {
+		for (int i = 0, X = 0; i < screenWidth; i++, X+=cellSize) {
+			cells[i][j].y = Y;
+			cells[i][j].x = X;
 		}
 	}
 
@@ -30,10 +34,10 @@ int main()
 			DrawFPS(10, 10);
 			// When the user clicks Left Mouse button activates that cell
 			if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT) && !game_running) {
-				int x = GetMouseX();
-				int y = GetMouseY();
-				cells[x][y].x = GetMouseX();
-				cells[x][y].y = GetMouseY();
+				// Find the closes multiple of cellSize and set x to that
+				int x = GetMouseX() / cellSize;
+				// Find the closest multiple of cellSize and set y to that 
+				int y = GetMouseY() / cellSize;
 				cells[x][y].state = true;
 				white_cells.push_back(cells[x][y]);
 			}
