@@ -10,7 +10,7 @@ int main()
 
 	InitWindow(windowWidth, windowHeight, "Game Of Life");
 	SetWindowState(FLAG_VSYNC_HINT);
-
+	
 	const int cellSize = 14;
 	const int screenWidth = windowWidth / cellSize;
 	const int screenHeight = windowHeight / cellSize;
@@ -34,12 +34,22 @@ int main()
 			DrawFPS(10, 10);
 			// When the user clicks Left Mouse button activates that cell
 			if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT) && !game_running) {
-				// Find the closes multiple of cellSize and set x to that
+				// Find the closest multiple of cellSize and set x,y to that
 				int x = GetMouseX() / cellSize;
-				// Find the closest multiple of cellSize and set y to that 
 				int y = GetMouseY() / cellSize;
 				cells[x][y].state = true;
-				white_cells.push_back(cells[x][y]);
+
+				// Check if the list already contains cells[x][y]
+				bool exists = false;
+				for (auto itr = white_cells.begin(); itr != white_cells.end(); itr++) {
+					if (*itr == cells[x][y])
+					{
+						exists = true;
+					}
+				}
+				if (!exists) {
+					white_cells.push_back(cells[x][y]);
+				}
 			}
 
 			// If Space is Pressed Start the game of life
