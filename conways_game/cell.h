@@ -1,4 +1,5 @@
 #pragma once
+#include "raylib.h"
 
 class cell {
 private:
@@ -10,4 +11,7 @@ public:
 	int no_of_neighbours;
 	cell();
 	void draw();
+	Rectangle get_cell();
+	bool operator==(cell& c) { return (x == c.x && y == c.y); }
+	bool operator!=(cell& c) { return !operator==(c); }
 };
