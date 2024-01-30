@@ -59,36 +59,6 @@ int main()
 
 			// find the no of neighbours of each cell
 			if (game_running) {
-				/*
-				for (int j = 0; j < screenHeight; j++) {
-					for (int i = 0; i < screenWidth; i++) {
-						int left = abs((i - 1)) % screenWidth;
-						int right = abs((i + 1)) % screenWidth;
-						int above = abs((j - 1)) % screenHeight;
-						int below = abs((j + 1)) % screenHeight;
-
-						if (CheckCollisionRecs(cells[i][j].get_cell(),cells[left][j].get_cell())) {
-							cells[i][j].no_of_neighbours++;
-						}
-						if (CheckCollisionRecs(cells[i][j].get_cell(), cells[right][j].get_cell())) {
-							cells[i][j].no_of_neighbours++;
-						}
-						if (CheckCollisionRecs(cells[i][j].get_cell(), cells[i][above].get_cell())) {
-							cells[i][j].no_of_neighbours++;
-						}
-						if (CheckCollisionRecs(cells[i][j].get_cell(), cells[i][below].get_cell())) {
-							cells[i][j].no_of_neighbours++;
-						}
-					}
-				}*/
-				/*
-				for (auto itr1 = white_cells.begin(); itr1 != white_cells.end(); itr1++) {
-					for (auto itr2 = itr1; itr2 != white_cells.end(); ++itr2) {
-						if (CheckCollisionRecs(itr1->get_cell(), itr2->get_cell())) {
-							(itr1->no_of_neighbours)++;
-						}
-					}
-				}*/
 				for (int j = 0; j < screenHeight; j++) {
 					for (int i = 0; i < screenWidth; i++) {
 						for (auto itr = white_cells.begin(); itr != white_cells.end(); itr++) {
